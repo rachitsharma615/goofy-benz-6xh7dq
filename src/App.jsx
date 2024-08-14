@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   useParams,
+  Navigate,
 } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,9 +17,10 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Redirect from root to /heyreplai */}
+        <Route path="/" element={<Navigate to="/heyreplai" replace />} />
         <Route path="/:variable" element={<PhoneInputForm />} />
       </Routes>
-      <ToastContainer />
     </Router>
   );
 }
@@ -45,10 +47,9 @@ function PhoneInputForm() {
     setLoading(true);
 
     try {
-      const response = await axios.post("/api/dial", {
-        phoneNumber,
-        variable,
-      });
+      const response = await axios.get(
+        `https://api.heyreplai.com/?to=${phoneNumber}prompt=${variable}`
+      );
 
       if (response.status === 200) {
         toast.success("Call dialed successfully!");
