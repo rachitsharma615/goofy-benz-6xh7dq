@@ -48,7 +48,7 @@ function PhoneInputForm() {
 
     try {
       const response = await axios.get(
-        `https://api.heyreplai.com/?to=${phoneNumber}prompt=${variable}`
+        `https://api.heyreplai.com/?to=${phoneNumber}&prompt=${variable}`
       );
 
       if (response.status === 200) {
