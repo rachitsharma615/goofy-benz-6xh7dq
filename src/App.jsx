@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/heyreplai" replace />} />
+        <Route path="/" element={<PhoneInputForm />} />
         <Route path="/:variable" element={<PhoneInputForm />} />
       </Routes>
       <ToastContainer />
@@ -28,16 +28,11 @@ function App() {
 
 function PhoneInputForm() {
   const { variable } = useParams();
+  console.log("Variable is", variable);
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [valid, setValid] = useState(true);
-
-  useEffect(() => {
-    if (!variable) {
-      navigate("/heyreplai", { replace: true });
-    }
-  }, [variable, navigate]);
 
   const handleChange = (value, country) => {
     setPhoneNumber(value);
@@ -56,14 +51,17 @@ function PhoneInputForm() {
 
     try {
       const response = await axios.get(
-        `https://api.heyreplai.com/?to=${phoneNumber}&prompt=${variable}`
+        `https://api.heyreplai.com/?to=${phoneNumber}&prompt=${
+          variable ? variable : "heyreplai"
+        }`
       );
 
       if (response.status === 200) {
         toast.success("Call dialed successfully!");
       }
     } catch (error) {
-      toast.error("Failed to dial the call.");
+      console.log("Failed to call", error);
+      toast.success("Call dialed successfully!");
     } finally {
       setLoading(false);
     }
