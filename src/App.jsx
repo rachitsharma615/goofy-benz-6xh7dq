@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useParams,
   useNavigate,
+  Navigate,
 } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,8 +18,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Redirect from root to /heyreplai */}
-        <Route path="/" element={<RootRedirect />} />
+        <Route path="/" element={<Navigate to="/heyreplai" replace />} />
         <Route path="/:variable" element={<PhoneInputForm />} />
       </Routes>
       <ToastContainer />
@@ -26,18 +26,18 @@ function App() {
   );
 }
 
-function RootRedirect() {
-  const navigate = useNavigate();
-
-  // If the user lands on the root URL, redirect to /heyreplai
-  return <Navigate to="/heyreplai" replace />;
-}
-
 function PhoneInputForm() {
   const { variable } = useParams();
+  const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [valid, setValid] = useState(true);
+
+  useEffect(() => {
+    if (!variable) {
+      navigate("/heyreplai", { replace: true });
+    }
+  }, [variable, navigate]);
 
   const handleChange = (value, country) => {
     setPhoneNumber(value);
