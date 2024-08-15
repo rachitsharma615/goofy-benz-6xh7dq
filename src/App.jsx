@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -17,6 +17,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Redirect from root to /heyreplai */}
         <Route path="/" element={<RootRedirect />} />
         <Route path="/:variable" element={<PhoneInputForm />} />
       </Routes>
@@ -28,11 +29,8 @@ function App() {
 function RootRedirect() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    navigate("/heyreplai", { replace: true });
-  }, [navigate]);
-
-  return null;
+  // If the user lands on the root URL, redirect to /heyreplai
+  return <Navigate to="/heyreplai" replace />;
 }
 
 function PhoneInputForm() {
