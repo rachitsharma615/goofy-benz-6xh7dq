@@ -7,6 +7,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 20px; /* Added padding for mobile responsiveness */
 }
 
 .container {
@@ -55,4 +56,26 @@ body {
 
 .cta-button:hover {
   background-color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px; /* Adjusted padding for smaller screens */
+  }
+
+  .title {
+    font-size: 20px; /* Smaller font size for mobile */
+    margin-bottom: 15px;
+  }
+
+  .input {
+    font-size: 14px; /* Adjusted input font size */
+    padding: 8px;
+  }
+
+  .cta-button {
+    padding: 10px; /* Adjusted button padding */
+    font-size: 14px;
+  }
 }
