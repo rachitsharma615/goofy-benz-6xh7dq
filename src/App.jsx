@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useParams,
-  Navigate,
+  useNavigate,
 } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,12 +17,22 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Redirect from root to /heyreplai */}
-        <Route path="/" element={<Navigate to="/heyreplai" replace />} />
+        <Route path="/" element={<RootRedirect />} />
         <Route path="/:variable" element={<PhoneInputForm />} />
       </Routes>
+      <ToastContainer />
     </Router>
   );
+}
+
+function RootRedirect() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/heyreplai", { replace: true });
+  }, [navigate]);
+
+  return null;
 }
 
 function PhoneInputForm() {
