@@ -7,7 +7,6 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding: 20px; /* Added padding for mobile responsiveness */
 }
 
 .container {
@@ -60,22 +59,28 @@ body {
 
 /* Responsive Styles */
 @media (max-width: 480px) {
+  body {
+    padding: 35px; /* Added padding to avoid edges */
+    padding-left: 0px;
+  }
+
   .container {
-    padding: 20px; /* Adjusted padding for smaller screens */
+    padding: 20px; /* Reduced padding for mobile */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Softer shadow */
   }
 
   .title {
-    font-size: 20px; /* Smaller font size for mobile */
+    font-size: 22px; /* Slightly smaller title */
     margin-bottom: 15px;
   }
 
   .input {
-    font-size: 14px; /* Adjusted input font size */
-    padding: 8px;
+    padding: 10px;
+    font-size: 15px;
   }
 
   .cta-button {
-    padding: 10px; /* Adjusted button padding */
+    padding: 10px;
     font-size: 14px;
   }
 }
